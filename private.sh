@@ -65,17 +65,3 @@ check_git() {
 check_git
 check_mysql
 
-REPO_URL="https://github.com/Safe-Ride/api-backend.git"
-REPO_DIR="api-backend/out/artifacts/api_backend_jar/"
-JAR_FILE="api_backend_jar/api-backend.jar"
-
-# Clona o repositório se ele não existir, ou faz git pull se já existir
-if [ ! -d "$REPO_DIR" ]; then
-    echo "Repositório não encontrado. Clonando o repositório..."
-    git clone "$REPO_URL"
-else
-    echo "Repositório já existe. Atualizando com git pull..."
-    cd "$REPO_DIR"
-    git pull
-    cd ..
-fi
