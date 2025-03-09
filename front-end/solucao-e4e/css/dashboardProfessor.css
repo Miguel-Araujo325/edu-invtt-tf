@@ -1,0 +1,405 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100&display=swap');
+
+* {
+    font-family: "DM Sans", sans-serif;
+}
+
+body {
+    margin: 0;
+    display: flex;
+}
+
+.space-professor{
+    width: auto;
+    margin-left: 2px;
+    margin-right: auto;
+    display: inline-block;
+    font-size: 25px;
+}
+
+.conteudo {
+    margin-left: 100px; /* Valor inicial quando o menu está fechado */
+    transition: margin-left 0.3s ease, width 0.3s ease;
+    padding: 20px;
+    width: calc(100% - 200px);
+}
+
+.conteudo.open {
+    margin-left: 250px; /* Valor quando o menu está aberto */
+    width: calc(100% - 250px); /* Ajusta a largura para que o conteúdo não seja coberto */
+}
+
+.buttons-professor {
+    display: flex;
+    justify-content: space-around;
+}
+
+.buttons-professor button {
+    background-color: #a8b6bf40 !important;
+    border: none;
+    font-weight: bold;
+    color: #072B59;
+}
+
+.conteudo p {
+    font-weight: bold;
+}
+
+.box {
+    width: 25vw;
+    height: 25vh;
+    border: 7px solid #072B59;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #888;
+    display: flex;
+    gap: 5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.agendamentos {
+    display: flex;
+    gap: 6rem;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.content p {
+    line-height: 0.8;
+}
+
+.kpis {
+    width: 100%;
+    display: flex;
+    margin-top: 7vh;
+    position: relative;
+    justify-content: space-between;
+}
+
+.content-kpis {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-kpis h2 {
+    font-size: 80px;
+    position: relative;
+    top: 1.5vh;
+}
+
+.content-kpis h2 span {
+    font-size: 20px;
+}
+
+.line-box {
+    border: 4px solid #072B59;
+    height: 17vh;
+    border-radius: 10px;
+    position: relative;
+    bottom: 1vh;
+}
+
+.box-kpis {
+    width: 22vw;
+    height: 25vh;
+    border: 1px solid #072B59;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #888;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+}
+
+.box-chart {
+    width: 30vw;
+    height: 60vh;
+    border: 1px solid #072B59;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #888;
+    display: flex;
+    padding: 2rem;
+    position: relative;
+    flex-direction: column;
+}
+
+.data h2 {
+    font-size: 60px;
+}
+
+.data p {
+    font-size: 20px;
+}
+
+.conteudo .title-agendamento {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.none {
+    color: rgba(255, 255, 255, 0);
+}
+
+.box-kpis-none {
+    width: 30vw;
+    height: 20vh;
+    border: 1px solid rgba(255, 255, 255, 0);
+    border-radius: 5%;
+    box-shadow: 5px 5px 5px rgba(255, 255, 255, 0);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    color: rgba(255, 255, 255, 0);
+}
+
+.line-box-none {
+    border: 4px solid ;
+    height: 15vh;
+    border-radius: 10px;
+    position: relative;
+    bottom: 2vh;
+}
+
+.kpis2 {
+    width: 100%;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    bottom: 25vh;
+}
+
+.box-chart2 {
+    width: 100%;
+    height: 90vh;
+    border: 1px solid #072B59;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #888;
+    display: flex;
+    padding-top: 40px;
+    padding-right: 40px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+#meuGrafico {
+    width: 10vw;
+
+}
+
+.box-buttons {
+    display: flex;
+    gap: 1rem;
+    position: relative;
+    height: 5vh;
+    justify-content: center;
+}
+
+#botaoChart {
+    background-color: rgba(52, 209, 191, 1) !important;
+    font-weight: bold;
+    font-size: 13px;
+    border: none;
+}
+
+#botaoChartN {
+    background-color: rgba(7, 43, 89, 1) !important;
+    font-weight: bold;
+    font-size: 13px;
+    border: none;
+    width: 10vw;
+}
+
+#title-chart {
+    font-weight: bold;
+    color: #072B59;
+    position: relative;
+    left: 1vw;
+    bottom: 1vh !important;
+}
+
+.line {
+    border: 1px solid #072B59;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.dropdown-btn {
+    padding-left: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+.hidden {
+    display: none;
+}
+
+
+@media only screen and (max-device-width: 430px) {
+
+    .dropdown-btn{
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0);  
+    }
+
+    .dropdown-container a{
+        font-size: 10px;
+    }
+
+
+    .sidebar {
+        width: 15vw;
+    }
+
+    .sidebar.active .nav-links li span {
+        display: none;
+    }
+
+    #toggle-btn {
+        display: none;
+    }
+
+    .buttons-professor {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .buttons-professor button {
+        width: 22vw;
+    }
+
+    .buttons-professor p {
+        display: none;
+    }
+
+    .agendamentos {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: unset;
+        gap: 5vh;
+    }
+
+    .box {
+        width: 60vw;
+        height: 20vh;
+        gap: 45px;
+    }
+
+    .content p {
+        line-height: 1.6;
+    }
+
+    .box-kpis {
+        width: 60vw;
+        height: 20vh;
+        gap: 1rem;
+    }
+
+    .kpis {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .kpis2{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        top: 5vh;
+    }
+
+    .box-chart {
+        width: 60vw;
+        height: 40vh;
+    }
+
+    #botaoChartN {
+        width: 60vw;
+    }
+    
+    .box-chart2{
+        width: 68vw;
+        height: 30vh;
+        padding: 0;
+        position: relative;
+        right: 4vw;
+    }
+
+    .none{
+        display: none;
+    }
+
+    .conteudo .title-agendamento{
+        right: 11vw;
+        position: relative;
+    }
+
+    #kpi{
+        right: 18vw;
+        position: relative;
+    }
+
+    .content-kpis p {
+        position: relative;
+        top: 0.5vh;
+    }
+
+    .variação{
+        gap: 1vw;
+    }
+
+    #seta-baixo {
+        position: relative;
+        right: 5.5vw;
+    }
+    
+    .seta-baixo {
+        position: relative;
+        right: 5.5vw;
+    }
+    
+    .seta-cima {
+        position: relative;
+        right: 5.5vw;
+    }
+
+
+    .line{
+        width: 90%;
+        position: relative;
+        right: 4vw;
+    }
+
+    .line2{
+        width: 90%;
+        position: relative;
+        right: 4vw;
+    }
+}

@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100&display=swap');
+
+* {
+    font-family: "DM Sans", sans-serif;
+}
+
+body {
+    margin: 0;
+    display: flex;
+}
+
+.conteudo {
+    margin-left: 100px;
+    transition: margin-left 0.3s ease, width 0.3s ease;
+    padding: 20px;
+    width: calc(100% - 200px);
+}
+
+.conteudo.open {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+}
+
+.dados {
+    width: 100%;
+    height: 10.5vh;
+    background-color: #072B59;
+
+}
+
+.form-control {
+    width: 8.5vw !important;
+    padding: 5px 10px !important;
+    font-size: 15px !important;
+}
+
+.inputs {
+    display: flex;
+    justify-content: flex-start;
+    white-space: nowrap;
+    padding-left: 1vw;
+    gap: 3vw;
+    
+}
+
+label {
+    color: white;
+    font-weight: bold;
+    position: relative;
+    top: 0.5vh;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.editar-lapis {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-evenly
+}
+
+.editar-lapis img {
+    width: 3vw;
+    cursor: pointer;
+    display: flex;
+}
+
+#botaoFilter{
+    color: #072B59 !important;
+    background-color: white !important;
+    border: none;
+    font-weight: bold;
+    width: 8vw !important;
+    height: 5vh;
+    position: relative;
+    left: 1vw;
+}
+
+.active>.page-link{
+    background-color: #072B59 !important;
+    border-color: 1px solid #072B59 !important ;
+    color: white !important;
+}
+
+.page-link{
+    color: #072B59 !important;
+    border-color: 1px solid #072B59 !important ;
+}
+
+#botaoFilter:hover{
+    color: white !important;
+    background-color: #a8b6bf40 !important;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    
+  }
+  
+  .custom-button i {
+    margin-right: 5px;
+  }
+
+  .custom-button {
+    background-color: #072B59;
+    color: white;
+    border: 2px solid #072B59;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+  
+  .custom-button:hover {
+    background-color: rgba(128, 128, 128, 0.466);
+    border:  2px solid rgba(128, 128, 128, 0.466);
+    color: black;
+    font-weight: bolder;
+  }
+
+  .breadcrumb-container {
+    display: flex;
+    align-items: center; /* Alinha breadcrumb e botão verticalmente no centro */
+    justify-content: space-between; /* Distribui espaço entre breadcrumb e botão */
+}
+
+@media only screen and (max-device-width: 430px) {
+
+    .dropdown-btn {
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0);
+    }
+
+    .dropdown-container a {
+        font-size: 10px;
+    }
+
+    .sidebar {
+        width: 16vw;
+    }
+
+    .sidebar.active .nav-links li span {
+        display: none;
+    }
+
+    #toggle-btn {
+        display: none;
+    }
+
+    .inputs {
+        flex-direction: column;
+        text-align: left !important;
+    }
+
+    .inputs input {
+        width: 45vw;
+    }
+
+    .inputs select {
+        width: 45vw;
+    }
+
+    .inputs label {
+        text-align: left !important;
+    }
+
+    #input_cpf {
+        position: relative;
+        left: 1.5vw;
+    }
+
+    #input_nicho {
+        position: relative;
+        right: 0.5vw;
+    }
+
+    #input_nivel {
+        position: relative;
+        left: 0.4vw;
+    }
+
+    #cpf {
+        position: relative;
+        right: 2vw;
+    }
+
+    #nicho {
+        position: relative;
+        right: 0.5vw;
+    }
+
+    #nivel {
+        position: relative;
+        right: 1vw;
+    }
+
+    .dados {
+        height: 33vh;
+    }
+
+}

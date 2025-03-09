@@ -1,0 +1,495 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100&display=swap');
+
+* {
+    font-family: "DM Sans", sans-serif;
+}
+
+body {
+    margin: 0;
+    display: flex;
+}
+
+.conteudo {
+    margin-left: 100px; /* Valor inicial quando o menu está fechado */
+    transition: margin-left 0.3s ease, width 0.3s ease;
+    padding: 20px;
+    width: calc(100% - 200px);
+}
+
+.conteudo.open {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+}
+
+.buttons-professor {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons-professor button {
+    background-color: #a8b6bf40 !important;
+    border: none;
+    font-weight: bold;
+    color: #072B59;
+}
+
+.dados {
+    width: 100%;
+    height: 12vh;
+    background-color: #a8b6bf40;
+    border-radius: 10px;
+}
+
+.filter {
+    width: 100%;
+    height: 7vh;
+    display: flex;
+    justify-content: space-around;
+    gap: 10rem;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.filter p {
+    color: #072B59;
+    font-weight: bold;
+    position: relative;
+    right: 33.5vw;
+    top: 1vh;
+}
+
+.filter img {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    right: 7vw;
+}
+
+.button-filter button {
+    background-color: #FFF !important;
+    border: none;
+    font-weight: bold;
+    color: #072B59;
+    position: relative;
+    left: 7vw;
+}
+
+.button-filter button:hover {
+    color: #072B59;
+}
+
+.inputs {
+    display: flex;
+    justify-content: space-around;
+}
+
+.line {
+    border: 1px solid #072B59;
+    width: 100%;
+}
+
+label {
+    color: #072B59;
+    font-weight: bold;
+    position: relative;
+}
+
+.dados-student {
+    background-color: #FFF;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+    height: 50vh;
+    gap: 20px;
+}
+
+.detalhes-student {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-student{
+    display: flex;
+    gap: 1vw;
+}
+
+.header-student img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.header-student p {
+    color: #072B59;
+    font-weight: bold;
+    position: relative;
+    top: 1.5vh;
+    font-size: 20px;
+}
+
+.form-student {
+    display: flex;
+}
+
+.personal-information {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+}
+
+.course-information{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+}
+
+.form-student.inativo{
+    opacity: 0.5 !important; /* Deixa opaco */
+    color: #f2f2f2 !important; /* Adiciona um cinza claro */ 
+}
+
+.header-student.inativo{
+    opacity: 0.5 !important; /* Deixa opaco */
+    color: #f2f2f2 !important; /* Adiciona um cinza claro */ 
+}
+
+.course-information.inativo{
+    opacity: 0.5 !important; /* Deixa opaco */
+    color: #f2f2f2 !important; /* Adiciona um cinza claro */ 
+}
+
+#status{
+    position: relative;
+    right: 20vw;
+}
+
+.inativo #status{
+    position: relative;
+    right: 20.5vw;
+}
+
+#select_ativo_inativo select option{
+    color: #072B59 !important;
+}
+
+.form-group {
+    flex: 1 1 30%;
+}
+
+.form-group input.label2 {
+    font-weight: 300;
+    min-width: 250px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: none;
+    outline: none;
+    color: #072B59;
+}
+
+.form-group input.label2:not([readonly]) {
+    border-bottom: 1px solid #000;
+    color: #072B59;
+}
+
+.inputs select{
+    width: 10.5vw;
+}
+
+/* Estilo do select desativado para parecer com a label */
+select[disabled]:not(.no-custom-style),
+.form-select[disabled]:not(.no-custom-style) {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: none;
+    color: #072B59;
+    cursor: not-allowed;
+    font-weight: 300;
+    min-width: 250px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0;
+}
+
+/* Estilo do select quando habilitado */
+select:not([disabled]):not(.no-custom-style),
+.form-select:not([disabled]):not(.no-custom-style) {
+    position: relative;
+    display: block;
+    z-index: 10;
+    appearance: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #072B59;
+    cursor: pointer;
+    font-weight: 300;
+    min-width: 250px;
+    max-width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+
+/* Estilo adicional para manter a consistência com inputs */
+select:not(.no-custom-style),
+.form-select:not(.no-custom-style) {
+    border-radius: 4px;
+    outline: none;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group .label2{
+    font-weight: 300;
+}   
+
+.form-group .label2,
+.form-group .label2{
+    min-width: 250px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.form-control{
+    width: 10.5vw !important;
+}
+
+.photo-student {
+    display: flex;
+    gap: 2vw;
+    align-items: center;
+    padding: 3vw;
+}
+
+.lapis{
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+
+.lapis-professor{
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    cursor: pointer;
+    bottom: 2.5vw !important;
+}
+
+.lapis img{
+    cursor: pointer;
+    position: relative;
+    bottom: 3.1vw !important;
+}
+
+.lixeira {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    bottom: 23vh;
+    cursor: pointer;
+}
+
+.lixeira-professor {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    bottom: 17vh;
+    cursor: pointer;
+}
+
+.lixeira img {
+    /* width: 3vw;
+    height: 6vh; */
+    cursor: pointer;
+}
+
+hr.line {
+    border: none;
+    border-top: 1px solid #072B59;
+    margin-top: 10px;
+}
+
+#botaoFilter{
+    color: #072B59 !important;
+    background-color: white !important;
+    border: none;
+    font-weight: bold;
+    width: 8vw !important;
+    height: 5vh;
+    position: relative;
+}
+
+.active>.page-link{
+    background-color: #072B59 !important;
+    border-color: 1px solid #072B59 !important ;
+    color: white !important;
+}
+
+.page-link{
+    color: #072B59 !important;
+    border-color: 1px solid #072B59 !important ;
+}
+
+#botaoFilter:hover{
+    color: white !important;
+    background-color: #a8b6bf40 !important;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .custom-button i {
+    margin-right: 5px;
+  }
+
+  .custom-button {
+    background-color: #072B59;
+    color: white;
+    border: 2px solid #072B59;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+  
+  .custom-button:hover {
+    background-color: rgba(128, 128, 128, 0.466);
+    border:  2px solid rgba(128, 128, 128, 0.466);
+    color: black;
+    font-weight: bolder;
+  }
+
+  .breadcrumb-container {
+    display: flex;
+    align-items: center; /* Alinha breadcrumb e botão verticalmente no centro */
+    justify-content: space-between; /* Distribui espaço entre breadcrumb e botão */
+}
+
+@media only screen and (max-device-width: 430px) {
+
+    .dropdown-btn{
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0);  
+    }
+
+    .dropdown-container a{
+        font-size: 10px;
+    }
+
+    .sidebar {
+        width: 16vw;
+    }
+
+    .sidebar.active .nav-links li span {
+        display: none;
+    }
+
+    #toggle-btn {
+        display: none;
+    }
+
+    .conteudo {
+        position: relative;
+        right: 8vw;
+    }
+
+    .inputs {
+        flex-direction: column;
+        text-align: left !important;
+    }
+
+    .inputs input {
+        width: 45vw;
+    }
+
+    .inputs select {
+        width: 45vw;
+    }
+
+    .inputs label {
+        text-align: left !important;
+    }
+
+    #input_cpf {
+        position: relative;
+        left: 1.5vw;
+    }
+
+    #input_nicho {
+        position: relative;
+        right: 0.5vw;
+    }
+
+    #input_nivel {
+        position: relative;
+        left: 0.4vw;
+    }
+
+    #cpf {
+        position: relative;
+        right: 2vw;
+    }
+
+    #nicho {
+        position: relative;
+        right: 0.5vw;
+    }
+
+    #nivel {
+        position: relative;
+        right: 1vw;
+    }
+
+    .dados {
+        height: 33vh;
+    }
+
+    .filter img {
+        left: 0vw;
+        height: 3vh;
+    }
+
+    .lixeira img {
+        position: relative;
+        right: 0vw;
+        width: 8vw;
+    }
+
+    .photo-student img {
+        width: 8vw;
+    }
+
+    .button-filter button {
+        position: relative;
+        left: 0vw;
+    }
+
+    .dados-student {
+        gap: 2vw;
+    }
+
+    .filter {
+        gap: 0vw;
+    }
+
+    .filter p {
+        right: 0vw;
+    }
+
+
+}
