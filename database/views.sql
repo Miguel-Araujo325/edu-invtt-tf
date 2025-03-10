@@ -1,3 +1,5 @@
+use english4ever;
+
 /* Ultima atualização de status de cada agendamento */
 CREATE VIEW vw_ultima_atualizacao_agendamento AS
 SELECT 

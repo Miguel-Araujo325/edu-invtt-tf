@@ -1,3 +1,5 @@
+use english4ever;
+
 -- Inserir 20 professores na tabela usuario
 INSERT INTO usuario (nome_completo, cpf, telefone, data_nascimento, data_cadastro, autenticado, profissao, email, senha, nivel_acesso_id, situacao_id) VALUES 
 ('Cristian Alborghetti', '300.261.160-30', '11092378173', '1985-05-15', '2024-06-05', TRUE, 'Professor de Inglês', 'cristian@email.com', 'cristian123', 3, 1),

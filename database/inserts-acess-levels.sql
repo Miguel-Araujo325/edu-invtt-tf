@@ -1,3 +1,5 @@
+use english4ever;
+
 -- Nivel Acesso 
 INSERT INTO nivel_acesso (nome) VALUES 
 ('ALUNO'),
