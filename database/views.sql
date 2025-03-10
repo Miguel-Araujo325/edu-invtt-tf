@@ -20,7 +20,7 @@ FROM (
 JOIN historico_agendamento ha ON ha.agendamento_id = ha_max.agendamento_id AND ha.id = ha_max.max_id
 JOIN agendamento a ON ha.agendamento_id = a.id;
 
-// select * from vw_ultima_atualizacao_agendamento;
+-- select * from vw_ultima_atualizacao_agendamento;
 
 /* ID 01 ->  Proximos 3 Agendamento Professor */
 
@@ -57,7 +57,7 @@ END //
 DELIMITER ;
 
 -- Chame a procedure com o ID do professor
-// CALL proximos_tres_agendamento_P(1);
+-- CALL proximos_tres_agendamento_P(1);
 
 /* ID 02-> Buscar a qtd de aulas agendadas para aquele mes */
 DELIMITER //
@@ -77,9 +77,9 @@ BEGIN
 END //
 
 DELIMITER ;
-// select * FROM STATUS;
+-- select * FROM STATUS;
 
-// CALL qtd_agendamento_mes(8, 2024, 1);
+-- CALL qtd_agendamento_mes(8, 2024, 1);
 
 DELIMITER //
 
@@ -99,7 +99,7 @@ END //
 
 DELIMITER ;
 
-// CALL qtd_aulas_confirmadas_mes(1, 12, 2024);
+-- CALL qtd_aulas_confirmadas_mes(1, 12, 2024);
 
 
 /* ID - 03 -> Tempo confirmação agendamento */
@@ -115,7 +115,7 @@ WHERE MONTH(data_cadastro) = MONTH(CURRENT_DATE())
 AND YEAR(data_cadastro) = YEAR(CURRENT_DATE())
 AND nivel_acesso_id = 1;
 
-// select * FROM qtd_novos_alunos;
+-- select * FROM qtd_novos_alunos;
 
 /* ID - 05 -> Quantidade de aulas cancelada no mes */
 
@@ -126,7 +126,7 @@ WHERE MONTH(agendamento_data) = MONTH(CURRENT_DATE())
 AND YEAR(agendamento_data) = YEAR(CURRENT_DATE())
 AND fk_status = (SELECT id FROM status WHERE nome = 'CANCELADO');
 
-// select * from qtd_cancelamento_aulas;
+-- select * from qtd_cancelamento_aulas;
 
 /* ID - 06 -> Quantidade de aulas concluidas e não concluido (Do inicio do mes até hj) */
 CREATE VIEW qtd_conclusao_ou_nao AS
@@ -138,7 +138,7 @@ WHERE MONTH(v.agendamento_data) = MONTH(CURRENT_DATE())
 AND YEAR(v.agendamento_data) = YEAR(CURRENT_DATE())
 AND DAY(v.agendamento_data) <= DAY(CURRENT_DATE());
 
-// select * FROM qtd_conclusao_ou_nao;
+-- select * FROM qtd_conclusao_ou_nao;
 
 /* ID - 07 -> Taxa Cancelamento */
 CREATE VIEW taxa_cancelamento AS
@@ -147,7 +147,7 @@ SELECT
 FROM vw_ultima_atualizacao_agendamento v
 WHERE YEAR(v.agendamento_data) = YEAR(CURRENT_DATE());
 
-// select * FROM taxa_cancelamento;
+-- select * FROM taxa_cancelamento;
 
 /* ID - 08 -> Agendamento que ainda não ocorreram */
 
@@ -178,7 +178,7 @@ END //
 
 DELIMITER ;
 
-// CALL proximos_agendamentos(1);
+-- CALL proximos_agendamentos(1);
 
 
 DELIMITER //
@@ -210,7 +210,7 @@ END //
 
 DELIMITER ;
 
-// CALL agendamentos_passados(1);
+-- CALL agendamentos_passados(1);
 
 /* ID - 10 -> Lista de todos professores */
 
@@ -234,7 +234,7 @@ JOIN nicho AS ni2 ON un.nicho_id = ni2.id
 JOIN horario_professor AS hp ON u.id = hp.usuario_id
 WHERE u.nivel_acesso_id IN (2, 3);
 
-// select * from todos_professores;
+-- select * from todos_professores;
 
 /* ID - 11 -> Lista de todos alunos */
 CREATE VIEW todos_alunos as 
@@ -258,7 +258,7 @@ JOIN
     nicho n ON un.nicho_id = n.id
     WHERE nivel_acesso_id = 1;
 
-// select * from todos_alunos;
+-- select * from todos_alunos;
 
 
 DELIMITER //
@@ -294,7 +294,7 @@ END //
 
 DELIMITER ;
 
-// CALL proximos_tres_agendamentos(3);
+-- CALL proximos_tres_agendamentos(3);
 
 
 DELIMITER //
@@ -335,7 +335,7 @@ END //
 
 DELIMITER ;
 
-// CALL visao_por_mes(40, 2024);
+-- CALL visao_por_mes(40, 2024);
 
 /*ID 14 -> Top 3 mese que mais teve aula */
 
@@ -377,7 +377,7 @@ END //
 
 DELIMITER ;
 
-// CALL top_tres_meses(3);
+-- CALL top_tres_meses(3);
 
 DELIMITER //
 
@@ -403,7 +403,7 @@ END //
 
 DELIMITER ;
 
-// CALL proximos_agendamentos_aluno(3);
+-- CALL proximos_agendamentos_aluno(3);
 
 /* ID - 16 -> Agendamento que já foram */
 DELIMITER //
@@ -432,7 +432,7 @@ END //
 
 DELIMITER ;
 
-// CALL agendamentos_passados_aluno(2);
+-- CALL agendamentos_passados_aluno(2);
 
 /* ID - 17 -> Perfil professores */
 CREATE VIEW perfil_professor AS
@@ -478,7 +478,7 @@ GROUP BY
     u.telefone, u.email, u.senha, u.nivel_acesso_id, 
     hp.inicio, hp.fim, hp.pausa_inicio, hp.pausa_fim, m.qtd_aula;
 
-// select * from perfil_professor;
+-- select * from perfil_professor;
 /* ID - 18 -> Perfil Aluno*/
 
 CREATE VIEW perfil AS
@@ -512,7 +512,7 @@ WHERE
 GROUP BY 
     u.id, u.nome_completo;
 
-// select * from perfil
+-- select * from perfil
 
 /* ID - 19 -> TAXA DE CANCELAMENTO MENSAL*/
 DELIMITER //
@@ -551,7 +551,7 @@ LIMIT 0, 400;
 END //
 DELIMITER ;
 
-// CALL taxa_cancelamento_mensal(1);
+-- CALL taxa_cancelamento_mensal(1);
 
 /* ID - 20 -> Agendamento detalhado */
 CREATE VIEW agendamentos_detalhes AS
@@ -573,7 +573,7 @@ FROM
     JOIN usuario u ON a.fk_aluno = u.id
 GROUP BY 
     a.id, p.nome_completo, u.nome_completo;
-// select * from agendamentos_detalhes;
+-- select * from agendamentos_detalhes;
 
 /* ID - 21 -> quantidade de aulas canceladas */
 DELIMITER //
@@ -591,7 +591,7 @@ END //
 
 DELIMITER ;
 
-// CALL qtd_agendamentos_cancelados(1);
+-- CALL qtd_agendamentos_cancelados(1);
  
  /*ID - 22 -> qtd de aulas transferidas*/
  DELIMITER //
@@ -608,7 +608,7 @@ END //
 
 DELIMITER ;
 
-// CALL aulas_transferidas_por_professor (1);
+-- CALL aulas_transferidas_por_professor (1);
 
 /*ID - 23 -> Metas*/
 DELIMITER //
@@ -641,7 +641,7 @@ BEGIN
 END //
 DELIMITER ;
  
- // CALL taxa_cumprimento_metas(1, 2024, 12);
+ -- CALL taxa_cumprimento_metas(1, 2024, 12);
 
 /*ID -24 -> Quantidade de alunos por mes */
 DELIMITER //
@@ -679,7 +679,7 @@ ORDER BY
 END //
 DELIMITER ;
 
-// CALL qtd_aluno_por_mes(1);
+-- CALL qtd_aluno_por_mes(1);
 
 /*ID 25 -> HORARIOS DISPONIVEIS */
 
@@ -731,7 +731,7 @@ END //
 
 DELIMITER // 
 
-// CALL sp_horarios_disponiveis('2024-10-11', 1);
+-- CALL sp_horarios_disponiveis('2024-10-11', 1);
 
 /*ID 25 -> Aulas concluidas de por um professor no mes*/
 DELIMITER //
@@ -772,7 +772,7 @@ END //
 
 DELIMITER ;
 
-// CALL aulas_concluidas_professor(1, 10);  
+-- CALL aulas_concluidas_professor(1, 10);  
 
 /*ID 26 -> Aulas concluidas de por um professor de todos os meses por ano*/
 
@@ -814,7 +814,7 @@ END //
 
 DELIMITER ;
 
-// CALL aulas_concluidas_todos_meses(1, 2024);
+-- CALL aulas_concluidas_todos_meses(1, 2024);
 
 /*ID 27 -> Horarios disponiveis para um professor agendar*/
 
@@ -852,4 +852,4 @@ END //
 
 DELIMITER ;
 
-// CALL sp_professores_disponiveis_transferencia('2024-11-14', '15:30:00', '16:29:00');
+-- CALL sp_professores_disponiveis_transferencia('2024-11-14', '15:30:00', '16:29:00');

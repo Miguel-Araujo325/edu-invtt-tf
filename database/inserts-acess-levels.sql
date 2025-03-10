@@ -3,13 +3,13 @@ INSERT INTO nivel_acesso (nome) VALUES
 ('ALUNO'),
 ('PROFESSOR_AUXILIAR'),
 ('REPRESENTANTE_LEGAL');
-// select * FROM nivel_acesso;
+-- select * FROM nivel_acesso;
 
 -- Situação
 INSERT INTO situacao (nome) VALUES 
 ('ATIVO'),
 ('INATIVO');
-// select * from situacao;
+-- select * from situacao;
 
 -- Nivel Ingles
 INSERT INTO nivel_ingles (nome) VALUES 
@@ -19,7 +19,7 @@ INSERT INTO nivel_ingles (nome) VALUES
 ('B2'),
 ('C1'),
 ('C2');
-// select * from nivel_ingles;
+-- select * from nivel_ingles;
 
 -- Nicho
 INSERT INTO nicho (nome) VALUES 
@@ -28,7 +28,7 @@ INSERT INTO nicho (nome) VALUES
 ('TECNICO'),
 ('TESTES_INTERNACIONAIS'),
 ('MORADORES_EXTERIOR');
-// select * from nicho;
+-- select * from nicho;
 
 -- Status
 INSERT INTO status (nome, descricao) VALUES 
@@ -37,7 +37,7 @@ INSERT INTO status (nome, descricao) VALUES
 ('CONCLUIDO', 'Agendamento concluido'), 
 ('CANCELADO', 'Agendamento cancelado'), 
 ('TRANSFERIDO', 'Agendamento transferido');
-// select * from status;
+-- select * from status;
 
 /*
 -- Usuario
@@ -47,13 +47,13 @@ INSERT INTO usuario (nome_completo, cpf, telefone, data_nascimento, data_cadastr
 ('Maria Souza', '987.654.321-00', '21987654321', '1982-11-30', '2024-05-05', TRUE, 'Piloto de Avião', 'maria.souza@example.com', 'senha456', 1, 1),
 ('Filho Christian', '546.097.435-00', '11092378173', '1985-05-15', '2024-06-05', TRUE, 'Professor de Inglês', 'filhochristian@email.com', 'Filhochristian123', 2, 1),
 ('Joana Airton', '743.183.324-01', '11728499339', '1983-03-1', '2024-10-30', TRUE, 'Aeromoça', 'joana.airton@example.com', 'senha789', 1, 1);
-// select * from usuario;
+-- select * from usuario;
 
 -- Horario Professor
 INSERT INTO horario_professor (inicio, fim, pausa_inicio, pausa_fim, usuario_id) VALUES 
 ('08:00:00', '23:00:00', '12:00:00', '13:00:00', 1),
 ('13:00:00', '17:30:00', '15:00:00', '15:30:00', 4);
-// select * from horario_professor;
+-- select * from horario_professor;
 
 -- Metas
 INSERT INTO meta (qtd_aula, usuario_id) VALUES 
@@ -67,7 +67,7 @@ INSERT INTO usuario_nivel_ingles (usuario_id, nivel_ingles_id) VALUES
 (3, 5),
 (3, 6),
 (4, 6);
-// select * from usuario_nivel_ingles;
+-- select * from usuario_nivel_ingles;
 
 -- Usuario Nicho
 INSERT INTO usuario_nicho (usuario_id, nicho_id) VALUES 
@@ -76,7 +76,7 @@ INSERT INTO usuario_nicho (usuario_id, nicho_id) VALUES
 (2, 1),
 (3, 3),
 (4, 4);
-// select * from usuario_nicho;
+-- select * from usuario_nicho;
 
 INSERT INTO agendamento (data, horario_inicio, horario_fim, assunto, fk_professor, fk_aluno) VALUES 
 ('2024-10-10', '08:00:00', '08:59:00', 'Aula de Inglês', 1, 5),
