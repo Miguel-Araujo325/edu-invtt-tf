@@ -27,7 +27,7 @@ async function cadastrarProfessor() {
         "meta": meta
     };
 
-    const respostaCadastro = await fetch("http://98.81.188.68/api/usuarios/salvar/professor", {
+    const respostaCadastro = await fetch("http://54.159.90.230/api/usuarios/salvar/professor", {
         method: "POST",
         body: JSON.stringify(dadosProfessor),
         headers: {

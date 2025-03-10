@@ -79,7 +79,7 @@ async function desautenticarUsuario() {
     const id = sessionStorage.getItem('id')
     usuario = retornaNivelRequisicao(Number(nivelAcesso))
 
-    const respostaDesautenticar = await fetch(`http://98.81.188.68/api/usuarios/${usuario}/desautenticar/${id}`, {
+    const respostaDesautenticar = await fetch(`http://54.159.90.230/api/usuarios/${usuario}/desautenticar/${id}`, {
         method: "POST",
         headers: { 'Authorization': `Bearer ${token}`, "Content-type": "application/json; charset=UTF-8" }
     });
