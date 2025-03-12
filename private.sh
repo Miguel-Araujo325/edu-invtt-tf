@@ -25,7 +25,7 @@ configure_mysql() {
     
     MYSQL_CONFIG="/etc/mysql/mysql.conf.d/mysqld.cnf"
 
-    # Alterando o bind-address para 0.0.0.0
+    # Alterando o bind-address para 10.0.0.0
     sudo sed -i "s/^bind-address\s*=.*/bind-address = 10.0.0.0/" "$MYSQL_CONFIG"
 
     echo "Reiniciando o MySQL para aplicar as mudanças..."
@@ -49,19 +49,18 @@ create_db_user() {
 
 setup_database() {
     DB_REPO_URL="https://github.com/Miguel-Araujo325/edu-invtt-tf"
-    DB_REPO_DIR="database"
+    DB_REPO_DIR="/tmp/edu-invtt-tf"  # Diretório temporário
 
-    if [ ! -d "$DB_REPO_DIR" ]; then
-        echo "Clonando o repositório do banco de dados..."
-        git clone "$DB_REPO_URL"
-    else
-        echo "Repositório do banco de dados já existe. Atualizando com git pull..."
-        cd "$DB_REPO_DIR"
-        git pull
-        cd ..
+    # Remove o diretório anterior se existir
+    if [ -d "$DB_REPO_DIR" ]; then
+        echo "Removendo repositório antigo..."
+        rm -rf "$DB_REPO_DIR"
     fi
 
-    echo "Executando script SQL para configurar o banco de dados..."
+    echo "Clonando o repositório do banco de dados no diretório temporário..."
+    git clone "$DB_REPO_URL" "$DB_REPO_DIR"
+
+    echo "Executando scripts SQL para configurar o banco de dados..."
     for script in ddl-table.sql inserts-acess-levels.sql views.sql inserts-users.sql; do
         if [ -f "$DB_REPO_DIR/$script" ]; then
             echo "Executando $script..."
@@ -70,7 +69,12 @@ setup_database() {
             echo "Arquivo $script não encontrado. Pulando..."
         fi
     done
+
     echo "Banco de dados configurado com sucesso."
+
+    # Limpeza do diretório temporário
+    echo "Removendo repositório do diretório temporário..."
+    rm -rf "$DB_REPO_DIR"
 }
 
 check_git() {
