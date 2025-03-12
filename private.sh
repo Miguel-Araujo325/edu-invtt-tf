@@ -6,6 +6,7 @@ check_mysql() {
         install_mysql
     else
         echo "MySQL já está instalado."
+        configure_mysql
     fi
 }
 
@@ -16,6 +17,20 @@ install_mysql() {
     sudo systemctl start mysql
     sudo systemctl enable mysql
     echo "MySQL Server instalado e iniciado."
+    configure_mysql
+}
+
+configure_mysql() {
+    echo "Configurando MySQL para aceitar conexões externas..."
+    
+    MYSQL_CONFIG="/etc/mysql/mysql.conf.d/mysqld.cnf"
+
+    # Alterando o bind-address para 0.0.0.0
+    sudo sed -i "s/^bind-address\s*=.*/bind-address = 10.0.0.0/" "$MYSQL_CONFIG"
+
+    echo "Reiniciando o MySQL para aplicar as mudanças..."
+    sudo systemctl restart mysql
+    
     create_db_user
 }
 
@@ -24,9 +39,10 @@ create_db_user() {
     DB_PASS="jau0987!!"
 
     echo "Criando o usuário '$DB_USER' no MySQL..."
-    sudo mysql -e "CREATE USER IF NOT EXISTS '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS';"
-    sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$DB_USER'@'localhost' WITH GRANT OPTION;"
+    sudo mysql -e "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS';"
+    sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$DB_USER'@'%' WITH GRANT OPTION;"
     sudo mysql -e "FLUSH PRIVILEGES;"
+
     echo "Usuário '$DB_USER' criado com sucesso."
     setup_database
 }
@@ -70,4 +86,3 @@ check_git() {
 # Executar verificações e configurações
 check_git
 check_mysql
-
