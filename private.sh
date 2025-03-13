@@ -58,7 +58,7 @@ setup_database() {
     fi
 
     echo "Clonando o repositório do banco de dados no diretório temporário..."
-    git clone "$DB_REPO_URL" "$DB_REPO_DIR"
+    git clone --branch database "$DB_REPO_URL" "$DB_REPO_DIR"
 
     echo "Executando scripts SQL para configurar o banco de dados..."
     for script in ddl-table.sql inserts-acess-levels.sql views.sql inserts-users.sql; do

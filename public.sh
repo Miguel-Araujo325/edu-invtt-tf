@@ -1,7 +1,16 @@
 #!/bin/bash
 
+BACKEND_IP=$1  # O IP do backend será passado como argumento
+
+if [ -z "$BACKEND_IP" ]; then
+    echo "ERRO: Nenhum IP de backend fornecido!"
+    exit 1
+fi
+
+echo "Usando o IP do backend: $BACKEND_IP"
+
 echo "Atualizando pacotes..."
-sudo apt update && sudo apt install -y nginx git aws-cli openjdk-17-jdk
+sudo apt update && sudo apt install -y nginx git openjdk-17-jdk
 
 REPO_URL="https://github.com/Miguel-Araujo325/edu-invtt-tf"
 TMP_DIR="/tmp/edu-invtt-tf"
@@ -12,14 +21,25 @@ sudo rm -rf "$TMP_DIR"
 echo "Clonando o repositório no diretório temporário..."
 git clone "$REPO_URL" "$TMP_DIR"
 
+# ======================== Configurando Backend ========================
+BACKEND_DIR="/opt/edu-invtt"
+sudo mkdir -p "$BACKEND_DIR"
+
+echo "Movendo arquivos .jar para $BACKEND_DIR..."
+sudo cp "$TMP_DIR/back-end/eduinovatte-0.0.1-SNAPSHOT.jar" "$BACKEND_DIR/api.jar"
+sudo cp "$TMP_DIR/back-end/eduinovatte-dashboard-0.0.1-SNAPSHOT.jar" "$BACKEND_DIR/dashboard.jar"
+
+echo "Iniciando backend..."
+nohup java -DIPV4_PRIVATE="$BACKEND_IP" -jar "$BACKEND_DIR/api.jar" > /var/log/api.log 2>&1 &
+# shellcheck disable=SC2086
+nohup java -DIPV4_PRIVATE=$BACKEND_IP -jar "$BACKEND_DIR/dashboard.jar" > /var/log/dashboard.log 2>&1 &
+echo "Backend iniciado com sucesso."
+
+
 # ======================== Configurando Frontend ========================
 echo "Configurando o frontend..."
 sudo rm -rf /var/www/html/*
-sudo cp -r "$TMP_DIR/front-end/*" /var/www/html/
-
-# ======================== Obtendo o IP do MySql ========================
-BACKEND_IP=$(aws ssm get-parameter --name "/config/backend_private_ip" --query "Parameter.Value" --output text)
-echo "IP do MySql obtido: $BACKEND_IP"
+sudo cp -r $TMP_DIR/front-end /var/www/html/
 
 # ======================== Configurando Nginx ========================
 cat <<EOT > /etc/nginx/sites-available/myserver
@@ -66,19 +86,6 @@ rm -f /etc/nginx/sites-enabled/default
 systemctl reload nginx
 systemctl restart nginx
 echo "Nginx configurado com sucesso."
-
-# ======================== Configurando Backend ========================
-BACKEND_DIR="/opt/edu-invtt"
-sudo mkdir -p "$BACKEND_DIR"
-
-echo "Movendo arquivos .jar para $BACKEND_DIR..."
-sudo cp "$TMP_DIR/back-end/eduinovatte-0.0.1-SNAPSHOT.jar" "$BACKEND_DIR/api.jar"
-sudo cp "$TMP_DIR/back-end/eduinovatte-dashboard-0.0.1-SNAPSHOT.jar" "$BACKEND_DIR/dashboard.jar"
-
-echo "Iniciando backend..."
-nohup java -DIPV4_PRIVATE=$BACKEND_IP -jar "$BACKEND_DIR/api.jar" > /var/log/api.log 2>&1 &
-nohup java -DIPV4_PRIVATE=$BACKEND_IP -jar "$BACKEND_DIR/dashboard.jar" > /var/log/dashboard.log 2>&1 &
-echo "Backend iniciado com sucesso."
 
 # ======================== Removendo Diretório Temporário ========================
 echo "Removendo arquivos temporários..."
