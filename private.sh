@@ -25,7 +25,7 @@ configure_mysql() {
     
     MYSQL_CONFIG="/etc/mysql/mysql.conf.d/mysqld.cnf"
 
-    # Alterando o bind-address para 10.0.0.0
+    # Alterando o bind-address para 0.0.0.0
     sudo sed -i "s/^bind-address\s*=.*/bind-address = 0.0.0.0/" "$MYSQL_CONFIG"
 
     echo "Reiniciando o MySQL para aplicar as mudanças..."
@@ -58,13 +58,13 @@ setup_database() {
     fi
 
     echo "Clonando o repositório do banco de dados no diretório temporário..."
-    git clone --branch database "$DB_REPO_URL" "$DB_REPO_DIR"
+    git clone --depth=1 --branch database --single-branch "$DB_REPO_URL" "$DB_REPO_DIR"
 
     echo "Executando scripts SQL para configurar o banco de dados..."
     for script in ddl-table.sql inserts-acess-levels.sql views.sql inserts-users.sql; do
         if [ -f "$DB_REPO_DIR/database/$script" ]; then
             echo "Executando $script..."
-            sudo mysql < "$DB_REPO_DIR/$script"
+            sudo mysql < "$DB_REPO_DIR/database/$script"
         else
             echo "Arquivo $script não encontrado. Pulando..."
         fi
