@@ -1,6 +1,5 @@
-
 resource "aws_eip" "nat_eip" {
-  domain = "vpc"
+  vpc = true
 }
 
 resource "aws_nat_gateway" "nat-edu-invtt" {

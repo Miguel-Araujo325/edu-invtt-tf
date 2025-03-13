@@ -12,12 +12,8 @@ resource "aws_instance" "ec2-public-edu-invtt" {
   connection {
     type        = "ssh"
     user        = "ubuntu"
-    private_key = file("./key-ec2-public-edu-invtt")
+    private_key = file("${path.module}/key-ec2-private-edu-invtt.pem")
     host        = self.public_ip
-
-    bastion_host = aws_instance.ec2-public-edu-invtt.public_ip
-    bastion_user        = "ubuntu"
-    bastion_private_key = file("./key-ec2-public-edu-invtt")
   }
 
   provisioner "file" {
@@ -47,12 +43,8 @@ resource "aws_instance" "ec2-private-edu-invtt" {
   connection {
     type        = "ssh"
     user        = "ubuntu"
-    private_key = file("./key-ec2-private-edu-invtt")
+    private_key = file("${path.module}/key-ec2-private-edu-invtt.pem")
     host        = self.private_ip
-
-    bastion_host        = aws_instance.ec2-public-edu-invtt.public_ip
-    bastion_user        = "ubuntu"
-    bastion_private_key = file("./key-ec2-public-edu-invtt")
   }
 
   provisioner "remote-exec" {
