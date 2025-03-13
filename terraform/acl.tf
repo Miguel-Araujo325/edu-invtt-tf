@@ -39,7 +39,7 @@ resource "aws_network_acl" "acl-public-edu-invtt" {
 
   egress {
     protocol   = "-1"
-    rule_no    = 600
+    rule_no    = 100
     action     = "allow"
     cidr_block = "0.0.0.0/0"
     from_port  = 0
@@ -58,7 +58,7 @@ resource "aws_network_acl" "acl-private-edu-invtt" {
     protocol   = "tcp"
     rule_no    = 100
     action     = "allow"
-    cidr_block = "10.0.0.0/24"
+    cidr_block = "10.0.0.0/23"
     from_port  = 22
     to_port    = 22
   }
@@ -67,16 +67,16 @@ resource "aws_network_acl" "acl-private-edu-invtt" {
     protocol   = "tcp"
     rule_no    = 200
     action     = "allow"
-    cidr_block = "10.0.0.0/24"
+    cidr_block = "10.0.0.0/23"
     from_port  = 80
     to_port    = 80
-  }
+  } 
 
   ingress {
     protocol   = "tcp"
     rule_no    = 300
     action     = "allow"
-    cidr_block = "10.0.0.0/24"
+    cidr_block = "10.0.0.0/23"
     from_port  = 443
     to_port    = 443
   }
@@ -85,23 +85,23 @@ resource "aws_network_acl" "acl-private-edu-invtt" {
     protocol   = "tcp"
     rule_no    = 400
     action     = "allow"
-    cidr_block = "0.0.0.0/0"
-    from_port  = 32000
-    to_port    = 65535
+    cidr_block = "10.0.0.0/23"
+    from_port  = 3306
+    to_port    = 3306
   }
 
   ingress {
     protocol   = "tcp"
     rule_no    = 500
     action     = "allow"
-    cidr_block = "10.0.0.0/24"
-    from_port  = 3306
-    to_port    = 3306
+    cidr_block = "0.0.0.0/0"
+    from_port  = 32000
+    to_port    = 65535
   }
 
   egress {
     protocol   = "-1"
-    rule_no    = 600
+    rule_no    = 100
     action     = "allow"
     cidr_block = "0.0.0.0/0"
     from_port  = 0
