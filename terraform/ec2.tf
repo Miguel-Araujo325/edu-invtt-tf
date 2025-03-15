@@ -47,6 +47,11 @@ resource "aws_instance" "ec2-private-edu-invtt" {
     destination = "/home/ubuntu/private.sh"
   }
 
+  provisioner "file" {
+    source      = "C:\\eduInovatte\\edu-invtt-tf\\database"
+    destination = "/tmp/database"
+  }
+
   connection {
     type        = "ssh"
     user        = "ubuntu"
