@@ -30,8 +30,8 @@ sudo cp "$TMP_DIR/back-end/api.jar" "$BACKEND_DIR/api.jar"
 sudo cp "$TMP_DIR/back-end/dashboard.jar" "$BACKEND_DIR/dashboard.jar"
 
 echo "Iniciando backend..."
-nohup env IPV4_PRIVATE="$BACKEND_IP" java -jar api.jar > /var/log/api.log 2>&1 &
-nohup env IPV4_PRIVATE="$BACKEND_IP" java -jar dashboard.jar > /var/log/dashboard.log 2>&1 &
+sudo nohup env IPV4_PRIVATE="$BACKEND_IP" java -jar api.jar > /var/log/api.log 2>&1 &
+sudo nohup env IPV4_PRIVATE="$BACKEND_IP" java -jar dashboard.jar > /var/log/dashboard.log 2>&1 &
 echo "Backend iniciado com sucesso."
 
 # ======================== Configurando Frontend ========================
@@ -67,6 +67,13 @@ server {
         proxy_set_header X-Real-IP \$remote_addr;
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
     }
+
+    location /api-dashboard/ {
+            proxy_pass http://localhost:7000/api-dashboard/;
+            proxy_set_header Host \$host;
+            proxy_set_header X-Real-IP \$remote_addr;
+            proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        }
 }
 EOT'
 
