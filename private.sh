@@ -48,45 +48,24 @@ create_db_user() {
 }
 
 setup_database() {
-    DB_REPO_URL="https://github.com/Miguel-Araujo325/edu-invtt-tf"
-    DB_REPO_DIR="/tmp/edu-invtt-tf"  # Diretório temporário
-
-    # Remove o diretório anterior se existir
-    if [ -d "$DB_REPO_DIR" ]; then
-        echo "Removendo repositório antigo..."
-        rm -rf "$DB_REPO_DIR"
-    fi
-
-    echo "Clonando o repositório do banco de dados no diretório temporário..."
-    git clone --depth=1 --branch database --single-branch "$DB_REPO_URL" "$DB_REPO_DIR"
-
-    echo "Executando scripts SQL para configurar o banco de dados..."
-    for script in ddl-table.sql inserts-acess-levels.sql views.sql inserts-users.sql; do
-        if [ -f "$DB_REPO_DIR/database/$script" ]; then
-            echo "Executando $script..."
-            sudo mysql < "$DB_REPO_DIR/database/$script"
-        else
-            echo "Arquivo $script não encontrado. Pulando..."
-        fi
-    done
-
-    echo "Banco de dados configurado com sucesso."
-
-    # Limpeza do diretório temporário
-    echo "Removendo repositório do diretório temporário..."
-    rm -rf "$DB_REPO_DIR"
-}
-
-check_git() {
-    if ! which git > /dev/null 2>&1; then
-        echo "Git não está instalado. Instalando..."
-        sudo apt update
-        sudo apt install git -y
+  DB_DIR="/tmp/database"
+  echo "Executando scripts SQL para configurar o banco de dados..."
+  for script in ddl-table.sql inserts-acess-levels.sql views.sql inserts-users.sql; do
+    if [ -f "$DB_DIR/$script" ]; then
+      echo "Executando $script..."
+      sudo mysql < "$DB_DIR/$script"
     else
-        echo "Git já está instalado."
+      echo "Arquivo $script não encontrado. Pulando..."
     fi
+  done
+
+  echo "Banco de dados configurado com sucesso."
+
+  echo "Banco de dados configurado com sucesso."
+
+  echo "Removendo repositório do diretório temporário..."
+  rm -rf "$DB_REPO_DIR"
 }
 
 # Executar verificações e configurações
-check_git
 check_mysql

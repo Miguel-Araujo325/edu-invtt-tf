@@ -19,7 +19,7 @@ echo "Removendo qualquer versão antiga do repositório..."
 sudo rm -rf "$TMP_DIR"
 
 echo "Clonando o repositório no diretório temporário..."
-git clone "$REPO_URL" "$TMP_DIR"
+sudo git clone "$REPO_URL" "$TMP_DIR"
 
 # ======================== Configurando Backend ========================
 BACKEND_DIR="/opt/edu-invtt"
@@ -27,22 +27,18 @@ sudo mkdir -p "$BACKEND_DIR"
 
 echo "Movendo arquivos .jar para $BACKEND_DIR..."
 sudo cp "$TMP_DIR/back-end/eduinovatte-0.0.1-SNAPSHOT.jar" "$BACKEND_DIR/api.jar"
-sudo cp "$TMP_DIR/back-end/eduinovatte-dashboard-0.0.1-SNAPSHOT.jar" "$BACKEND_DIR/dashboard.jar"
 
 echo "Iniciando backend..."
-nohup java -DIPV4_PRIVATE="$BACKEND_IP" -jar "$BACKEND_DIR/api.jar" > /var/log/api.log 2>&1 &
-# shellcheck disable=SC2086
-nohup java -DIPV4_PRIVATE=$BACKEND_IP -jar "$BACKEND_DIR/dashboard.jar" > /var/log/dashboard.log 2>&1 &
+sudo nohup java -DIPV4_PRIVATE="$BACKEND_IP" -Dserver.port=8080 -jar "$BACKEND_DIR/api.jar" > /var/log/api.log 2>&1 &
 echo "Backend iniciado com sucesso."
-
 
 # ======================== Configurando Frontend ========================
 echo "Configurando o frontend..."
 sudo rm -rf /var/www/html/*
-sudo cp -r $TMP_DIR/front-end /var/www/html/
+sudo cp -r "$TMP_DIR/front-end" /var/www/html/
 
 # ======================== Configurando Nginx ========================
-cat <<EOT > /etc/nginx/sites-available/myserver
+sudo bash -c 'cat <<EOT > /etc/nginx/sites-available/myserver
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
@@ -69,22 +65,14 @@ server {
         proxy_set_header X-Real-IP \$remote_addr;
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
     }
-
-    # Proxy para API Dashboard
-    location /api-dashboard/ {
-        proxy_pass http://$BACKEND_IP:7000/api-dashboard/;
-        proxy_set_header Host \$host;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-    }
 }
-EOT
+EOT'
 
 # Ativando a configuração do Nginx
-ln -sf /etc/nginx/sites-available/myserver /etc/nginx/sites-enabled/myserver
-rm -f /etc/nginx/sites-enabled/default
-systemctl reload nginx
-systemctl restart nginx
+sudo ln -sf /etc/nginx/sites-available/myserver /etc/nginx/sites-enabled/myserver
+sudo rm -f /etc/nginx/sites-enabled/default
+sudo systemctl reload nginx
+sudo systemctl restart nginx
 echo "Nginx configurado com sucesso."
 
 # ======================== Removendo Diretório Temporário ========================
