@@ -26,10 +26,12 @@ BACKEND_DIR="/opt/edu-invtt"
 sudo mkdir -p "$BACKEND_DIR"
 
 echo "Movendo arquivos .jar para $BACKEND_DIR..."
-sudo cp "$TMP_DIR/back-end/eduinovatte-0.0.1-SNAPSHOT.jar" "$BACKEND_DIR/api.jar"
+sudo cp "$TMP_DIR/back-end/api.jar" "$BACKEND_DIR/api.jar"
+sudo cp "$TMP_DIR/back-end/dashboard.jar" "$BACKEND_DIR/dashboard.jar"
 
 echo "Iniciando backend..."
-sudo nohup java -DIPV4_PRIVATE="$BACKEND_IP" -Dserver.port=8080 -jar "$BACKEND_DIR/api.jar" > /var/log/api.log 2>&1 &
+nohup env IPV4_PRIVATE="$BACKEND_IP" java -jar api.jar > /var/log/api.log 2>&1 &
+nohup env IPV4_PRIVATE="$BACKEND_IP" java -jar dashboard.jar > /var/log/dashboard.log 2>&1 &
 echo "Backend iniciado com sucesso."
 
 # ======================== Configurando Frontend ========================
