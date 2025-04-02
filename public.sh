@@ -30,7 +30,7 @@ sudo cp "$TMP_DIR/back-end/api.jar" "$BACKEND_DIR/api.jar"
 sudo cp "$TMP_DIR/back-end/dashboard.jar" "$BACKEND_DIR/dashboard.jar"
 
 echo "Iniciando backend..."
-sudo nohup env IPV4_PRIVATE="$BACKEND_IP" java -jar "$BACKEND_DIR/api.jar" > /var/log/api.log 2>&1 &
+sudo nohup env IPV4_PRIVATE="$BACKEND_IP" S3_BUCKET="" java -jar "$BACKEND_DIR/api.jar" > /var/log/api.log 2>&1 &
 sudo nohup env IPV4_PRIVATE="$BACKEND_IP" java -jar "$BACKEND_DIR/dashboard.jar" > /var/log/dashboard.log 2>&1 &
 echo "Backend iniciado com sucesso."
 
